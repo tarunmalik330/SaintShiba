@@ -6,6 +6,41 @@
   text-decoration: none !important;
   box-sizing: border-box;
 }
+#button {
+  display: inline-block;
+  background-color: #ff9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+#button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#button:active {
+  background-color: #555;
+}
+#button.show {
+  opacity: 1;
+  visibility: visible;
+}
 .bg_black {
   background: #0c0b0b;
 }
@@ -78,17 +113,12 @@
   display: flex;
   align-items: flex-start;
 }
-/* .border-radius {
-  border-bottom-left-radius: 10px !important;
-  border-bottom-right-radius: 10px !important;
-} */
 .border-bottom-left-radius {
   border-bottom-left-radius: 30px;
 }
 .border-bottom-right-radius {
   border-bottom-right-radius: 30px;
 }
-
 .pb-32 {
   padding-bottom: 32px;
 }
@@ -96,10 +126,15 @@
   background: linear-gradient(90deg, #ffa800 0%, #f06500 100%);
   border-radius: 24px;
   padding: 7px 23px;
-  border: 2px solid linear-gradient(90deg, #ffa800 0%, #f06500 100%);
+  border: 2px solid transparent;
   display: inline-block;
   z-index: 1;
   position: relative;
+  outline: none;
+  transitiona: all .3s linear !important;
+}
+.button:hover {
+  box-shadow: 0 3px 20px rgba(255, 255, 255, 1);
 }
 .background-color {
   background: rgba(0, 0, 0, 0.75);
@@ -107,7 +142,7 @@
 .rotate-90 {
   transform: rotate(90deg);
 }
-.z-index-2 {
+position-fixed-lg z-index-2-lg .z-index-2 {
   z-index: 2;
 }
 .mr_3 {
@@ -184,7 +219,6 @@
   bottom: 491px;
   border-radius: 100px;
   background: rgba(240, 101, 0, 0.58);
-  /* fill: var(--orange, #F06500); */
   filter: blur(150px);
 }
 
@@ -355,7 +389,6 @@ td {
   border: 2px solid #373636;
 }
 .accordion-button {
-  /* background-color: black !important; */
   background: linear-gradient(
       95.21deg,
       rgba(255, 255, 255, 0.2) -0.59%,
@@ -369,8 +402,6 @@ td {
 }
 .accordion-item {
   color: var(--bs-accordion-color);
-  /* background-color: var(--bs-accordion-bg); */
-  /* border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color); */
 }
 .accordion-flush .accordion-item .accordion-button,
 .accordion-flush .accordion-item .accordion-button.collapsed {
@@ -400,7 +431,6 @@ td {
 }
 .accordion-item {
   color: var(--bs-accordion-color);
-  /* background-color: var(--bs-accordion-bg); */
   border: none !important;
 }
 .accordion-button {
@@ -430,7 +460,6 @@ td {
 .accordion-button:not(.collapsed) {
   color: none;
 }
-/* The actual timeline (the vertical ruler) */
 .timeline {
   position: relative;
   max-width: 1200px;
@@ -440,7 +469,6 @@ td {
   margin-bottom: 27px;
 }
 
-/* The actual timeline (the vertical ruler) */
 .timeline::after {
   content: "";
   position: absolute;
@@ -452,15 +480,12 @@ td {
   margin-left: -3px;
 }
 
-/* Container around content */
 .timelinecontainer {
   padding: 10px 40px;
   position: relative;
-  /* background-color: inherit; */
   width: 50%;
 }
 
-/* The circles on the timeline */
 .timelinecontainer::after {
   content: "";
   position: absolute;
@@ -473,17 +498,12 @@ td {
   z-index: 1;
 }
 
-/* Place the container to the left */
 .left {
   left: 0;
 }
-
-/* Place the container to the right */
 .right {
   left: 50%;
 }
-
-/* Fix the circle for containers on the right side */
 .right::after {
   left: -12px;
 }
@@ -511,38 +531,26 @@ table tr:last-child td:first-of-type {
 table tr:last-child td:last-of-type {
   border-bottom-right-radius: 20px;
 }
-
-/* url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") */
-
-/* Media queries - Responsive timeline on screens less than 600px wide */
 @media screen and (max-width: 576px) {
-  /* Place the timelime to the left */
   .timeline::after {
     left: 31px;
   }
 
-  /* Full-width containers */
   .timelinecontainer {
     width: 100%;
     padding-left: 70px;
     padding-right: 25px;
   }
-
-  /* Make sure that all arrows are pointing leftwards */
   .timelinecontainer::before {
     left: 60px;
     border: medium solid white;
     border-width: 10px 10px 10px 0;
     border-color: transparent white transparent transparent;
   }
-
-  /* Make sure all circles are at the same spot */
   .left::after,
   .right::after {
     left: 15px;
   }
-
-  /* Make all right containers behave like the left ones */
   .right {
     left: 0%;
   }
@@ -585,10 +593,7 @@ table tr:last-child td:last-of-type {
     cursor: pointer;
   }
   .position-fixed-lg {
-    /* z-index: 1; */
     position: fixed;
-    /* right: 0px; */
-    /* width: 100%; */
   }
   .z-index-2-lg {
     z-index: 2;
